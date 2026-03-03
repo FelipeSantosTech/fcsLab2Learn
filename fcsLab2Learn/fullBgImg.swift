@@ -9,40 +9,94 @@ import SwiftUI
 
 struct fullBgImg: View {
     var body: some View {
-        ZStack {
-            Image("darkbg_pullup")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
-            
-            Color.black.opacity(0.4)
-                .ignoresSafeArea()
-            
-            
-            VStack(spacing: 20) {
-                Text("Discipline")
-                    .font(.largeTitle)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
-                    .padding(.top, 30)
+        ScrollView {
+            VStack(spacing: 0) {
                 
-                Spacer()
-                Text("No one is coming to save you.")
-                     .foregroundColor(.white)
-                
-                Button("Start your journey") {
-
+                // HERO
+                ZStack(alignment: .bottom) {
+                    
+                    Image("darkbg_pullup")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(maxWidth: .infinity)
+                        .clipped()
+                    
+                    Color.black.opacity(0.4)
+                    
+                    // Bottom fade overlay
+                    LinearGradient(
+                        colors: [.black, .white.opacity(0.2)
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(height: 180)
+                    
+                    VStack {
+                        Text("Discipline")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                            .padding(.top, 60)
+                        
+                        Spacer()
+                        
+                        Text("No one is coming to save you.")
+                            .foregroundColor(.white)
+                        
+                        Button("Home screen") {}
+                            .padding()
+                            .frame(maxWidth: 360)
+                            .background(Color.white)
+                            .foregroundStyle(.black)
+                            .clipShape(RoundedRectangle(cornerRadius: 100))
+                            .bold()
+                            .font(.title2)
+                            .padding(.bottom, 80)
+                        
+                        HStack{
+                            Image(systemName: "arrow.down")
+                            Text("What I learned in this experiment")
+                            Image(systemName: "arrow.down")
+                        }
+                        .foregroundStyle(.white)
+                    }
+                    .padding(.horizontal, 24)
                 }
-                .padding()
-                .frame(maxWidth: .infinity)
-                .cornerRadius(99)
-                .background(Color.white)
-                .foregroundStyle(.black)
-                .padding(.bottom, 120)
+                .containerRelativeFrame(.vertical)
+                
+                
+                // FADE
+                LinearGradient(
+                    colors: [.black, .black.opacity(0.9)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .frame(height: 150)
+                
+                
+                // WHITE SECTION
+                VStack(spacing: 20) {
+                    Text("More Content Here")
+                        .font(.title)
+                        .foregroundStyle(.white)
+                    
+                    ForEach(0..<10) { _ in
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.gray.opacity(0.1))
+                            .frame(height: 120)
+                            .padding(.horizontal)
+                    }
+                }
+                .padding(.top, 40)
+                .padding(.bottom, 100)
+                .background(Color.black.opacity(0.9))
             }
         }
+        .ignoresSafeArea()
     }
 }
+
 #Preview {
     fullBgImg()
 }
